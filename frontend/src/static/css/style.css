@@ -230,28 +230,6 @@ form input, form textarea {
     box-sizing: border-box;
 }
 
-.carteles-desaparecidos {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 1rem;
-    margin-top: 2rem;
-}
-
-.cartel {
-    width: 200px;
-    padding: 1rem;
-    border: 1px solid #ddd;
-    border-radius: 8px;
-    background-color: #f9f9f9;
-    text-align: center;
-}
-
-.cartel img {
-    max-width: 100%;
-    height: auto;
-    border-radius: 4px;
-}
-
 button {
     padding: 0.5rem;
     background-color: #007bff;
@@ -273,4 +251,50 @@ input[type="date"] {
     margin-top: 0.5rem;
     width: 100%;
     box-sizing: border-box;
+}
+
+/* Estilo de la lista de desaparecidos */
+.desaparecidos-list {
+    display: flex;
+    flex-wrap: wrap; /* Permitir que los elementos pasen a una nueva fila cuando no caben */
+    gap: 1rem; /* Espacio entre carteles */
+    justify-content: center; /* Centrar los carteles en la pantalla */
+    margin-top: 20px;
+    padding: 0 10px; /* Espacio lateral para asegurar que los carteles no toquen los bordes */
+}
+
+/* Estilo de carteles individuales */
+.desaparecido-card {
+    background-color: #f9f9f9;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 1rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    max-width: 300px; /* Ancho máximo de cada cartel */
+    flex: 1 1 300px; /* Ancho flexible, permite que los carteles se ajusten en filas */
+}
+
+/* Tamaño de imagen reducido */
+.desaparecido-card img {
+    max-width: 100%;
+    max-height: 200px;
+    border-radius: 4px;
+    margin-bottom: 10px;
+    object-fit: cover;
+}
+
+.desaparecido-card h3 {
+    margin: 0.5rem 0;
+    color: #333;
+    font-size: 1.2rem;
+}
+
+.desaparecido-card p {
+    margin: 0.3rem 0;
+    color: #666;
+    font-size: 0.9rem;
 }
