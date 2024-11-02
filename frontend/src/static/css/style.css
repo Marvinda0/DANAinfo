@@ -8,9 +8,8 @@ body {
 
 .navbar {
     background-color: black; /* Color rojo de España */
-    color: yellow;
     display: flex;
-    justify-content: space-between;
+    justify-content: flex-start; /* Cambiado a flex-start */
     align-items: center;
     padding: 1rem 2rem;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Sombra más pronunciada para el navbar */
@@ -28,23 +27,41 @@ body {
     margin: 0;
     padding: 0;
     display: flex;
+    
 }
 .navbar-logo {
-    height: 50px; /* Ajusta la altura según lo que necesites */
+    height: 70px; /* Ajusta la altura según lo que necesites */
     width: auto; /* Mantiene la proporción */
     margin-right: 1rem; /* Espacio a la derecha del logo */
 }
-
+.navbar-xlogo{
+    height: 50px; /* Ajusta la altura según lo que necesites */
+    width: auto; /* Mantiene la proporción */
+    margin-left: 40rem; /* Esto empuja el logo a la derecha */
+}
+.navbar-title {
+    font-size: 2rem;
+    font-weight: bold;
+    color: rgb(43, 109, 184);
+    padding: 0.3rem 0.5rem;
+    border: 2px solid purple; /* Borde rojo */
+    border-radius: 4px; /* Bordes redondeados */
+    margin-right: auto; /* Ajusta el valor para moverlo a la derecha */
+    background-color: white;
+}
 .nav-item {
     margin-left: 2.5rem; /* Mayor espacio entre los elementos */
 }
 
 .nav-item a {
-    color:yellow;
+    color:red;
     text-decoration: none;
     font-weight: bold;
     transition: color 0.3s;
-    font-size: 1.2rem; /* Aumenté el tamaño de los enlaces */
+    font-size: 1.6rem; /* Aumenté el tamaño de los enlaces */
+    border: 2px solid white; /* Borde rojo */
+    background-color:white;
+    border-radius: 4px; /* Bordes redondeados */
 }
 
 .nav-item a:hover {
@@ -60,6 +77,11 @@ body {
     font-size: 4rem; /* Tamaño de fuente grande para el título */
     color: #FF0000; /* Color rojo para el título */
     font-weight: bold; /* Asegurarse de que sea prominente */
+}
+.stats p.clarification-text {
+    font-size: 1rem; /* Smaller font size */
+    color: #666;
+    margin-top: -1.5rem;
 }
 
 .footer {
