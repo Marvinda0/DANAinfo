@@ -1,0 +1,101 @@
+body {
+    background-color: #f8f9fa;
+    font-family: 'Roboto', sans-serif;
+    margin: 0;
+    padding: 0;
+    font-size: 1.3rem; /* Aumenta el tamaño de fuente general */
+}
+
+.navbar {
+    background-color: black; /* Color rojo de España */
+    color: yellow;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 2rem;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Sombra más pronunciada para el navbar */
+}
+
+.navbar-brand {
+    font-size: 2.5rem; /* Aumenté el tamaño para destacar más */
+    font-weight: bold; 
+    text-decoration: none; 
+    letter-spacing: 1px; /* Espaciado entre letras para un efecto más atractivo */
+}
+
+.navbar-nav {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+}
+.navbar-logo {
+    height: 50px; /* Ajusta la altura según lo que necesites */
+    width: auto; /* Mantiene la proporción */
+    margin-right: 1rem; /* Espacio a la derecha del logo */
+}
+
+.nav-item {
+    margin-left: 2.5rem; /* Mayor espacio entre los elementos */
+}
+
+.nav-item a {
+    color:yellow;
+    text-decoration: none;
+    font-weight: bold;
+    transition: color 0.3s;
+    font-size: 1.2rem; /* Aumenté el tamaño de los enlaces */
+}
+
+.nav-item a:hover {
+    color: #ffe600; /* Color amarillo al pasar el mouse */
+}
+
+.header {
+    text-align: center;
+    margin: 2rem 0;
+}
+
+.header h1 {
+    font-size: 4rem; /* Tamaño de fuente grande para el título */
+    color: #FF0000; /* Color rojo para el título */
+    font-weight: bold; /* Asegurarse de que sea prominente */
+}
+
+.footer {
+    text-align: center;
+    padding: 1rem 0;
+    background-color: #f1f1f1;
+    border-top: 1px solid #eaeaea;
+    position: relative;
+    bottom: 0;
+    width: 100%;
+    margin-top: 20px; 
+}
+
+.stats {
+    text-align: left;
+    margin: 2rem auto;
+    padding: 1.5rem;
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2); /* Sombra más fuerte para las estadísticas */
+    max-width: 600px;
+}
+
+.stats p {
+    font-size: 2.5rem; 
+    font-weight: bold; 
+    margin: 1rem 0; 
+}
+
+.stats span {
+    font-size: 3.5rem; /* Tamaño de números incrementado */
+    color: #FF0000; 
+    font-weight: bold; 
+}
+
+.highlight {
+    color: #ffe600; /* Color amarillo para resaltar texto */
+    font-weight: bold; 
+}
