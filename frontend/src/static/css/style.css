@@ -1,3 +1,14 @@
+@keyframes blink {
+    0%, 100% {
+        background-color: #FF0000; /* Rojo */
+        color: white; /* Texto blanco */
+    }
+    50% {
+        background-color: yellow; /* Amarillo */
+        color: #FF0000; /* Texto rojo */
+    }
+}
+
 body {
     background-color: #f8f9fa;
     font-family: 'Roboto', sans-serif;
@@ -120,4 +131,74 @@ body {
 .highlight {
     color: #ffe600; /* Color amarillo para resaltar texto */
     font-weight: bold; 
+}
+
+.news-section {
+    margin: 2rem auto;
+    max-width: 800px;
+    padding: 1rem;
+    background-color: #f9f9f9;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.news-section h3 {
+    text-align: center;
+    color: black;
+    background-color: gold;
+    padding: 0.5rem; /* Agrega un poco de espacio alrededor del título */
+    font-size: 1.5rem;
+    border-radius: 4px; /* Bordes redondeados para el fondo del título */
+}
+
+.news-section ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+.news-item {
+    display: flex; /* Alinea la imagen y el contenido en una fila */
+    align-items: center;
+    margin-bottom: 1rem;
+    border-bottom: 1px solid #eaeaea;
+    padding-bottom: 1rem;
+}
+
+.news-image {
+    width: 100px; /* Ajusta el tamaño de la imagen */
+    height: auto;
+    border-radius: 4px; /* Bordes redondeados para la imagen */
+    margin-right: 1rem; /* Espacio entre la imagen y el contenido */
+}
+
+.news-content a {
+    font-size: 1.1rem;
+    font-weight: bold;
+    color: #333;
+    text-decoration: none;
+}
+
+.news-content a:hover {
+    color: blue;
+}
+
+.news-content p {
+    font-size: 0.9rem;
+    color: #666;
+}
+
+.desaparecidos-button {
+    color: white;
+    background-color: #FF0000;
+    padding: 0.5rem 1rem;
+    border-radius: 4px;
+    text-decoration: none;
+    font-weight: bold;
+    animation: blink 2s infinite; /* Aplica la animación */
+}
+
+.desaparecidos-button:hover {
+    animation: none; /* Detiene la animación */
+    background-color: #FF0000; /* Fondo rojo fijo */
+    color: white; /* Texto blanco */
 }
