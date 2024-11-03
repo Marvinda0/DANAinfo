@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 
+const baseURL = process.env.REACT_APP_API_URL || 'http://localhost:5000';
+
 function Desaparecidos() {
     const [desaparecidos, setDesaparecidos] = useState([]);
     const [loading, setLoading] = useState(true);
@@ -19,7 +21,7 @@ function Desaparecidos() {
         const fetchDesaparecidos = async () => {
             try {
                 setLoading(true);
-                const response = await axios.get(`http://localhost:5000/desaparecidos?page=${page}&limit=${limit}`);
+                const response = await axios.get(`${baseURL}/desaparecidos?page=${page}&limit=${limit}`);
                 setDesaparecidos(response.data.desaparecidos);
                 setTotalCount(response.data.total_count);
             } catch (error) {
@@ -43,7 +45,7 @@ function Desaparecidos() {
         formData.append("imagen", imagen);
 
         try {
-            const response = await axios.post('http://localhost:5000/desaparecidos', formData, {
+            const response = await axios.post(`${baseURL}/desaparecidos`, formData, {
                 headers: {
                     'Content-Type': 'multipart/form-data',
                 },

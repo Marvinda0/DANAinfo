@@ -2,6 +2,8 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import '../static/css/style.css';
 
+const baseURL = process.env.REACT_APP_API_URL || 'http://localhost:5000';
+
 function HomePage() {
     const [numFallecidos, setNumFallecidos] = useState(0);
     const [numDesaparecidos, setNumDesaparecidos] = useState(0); // State for desaparecidos count
@@ -11,7 +13,7 @@ function HomePage() {
     useEffect(() => {
         const fetchFallecidos = async () => {
             try {
-                const response = await axios.get('http://localhost:5000/fallecidos');
+                const response = await axios.get(`${baseURL}/fallecidos`);
                 setNumFallecidos(response.data.fallecidos);
             } catch (error) {
                 console.error('Error fetching fallecidos:', error);
@@ -25,7 +27,7 @@ function HomePage() {
     useEffect(() => {
         const fetchDesaparecidosCount = async () => {
             try {
-                const response = await axios.get('http://localhost:5000/desaparecidos/count');
+                const response = await axios.get(`${baseURL}/desaparecidos/count`);
                 setNumDesaparecidos(response.data.count);
             } catch (error) {
                 console.error('Error fetching desaparecidos count:', error);
