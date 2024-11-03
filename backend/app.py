@@ -14,7 +14,7 @@ import time
 load_dotenv()  # Load environment variables
 MONGODB_URI = os.getenv("MONGODB_URI")
 
-app = Flask(__name__, static_folder='static/build')  # Updated static folder
+app = Flask(__name__, static_folder='static/build')
 CORS(app)  # Enable CORS
 
 # Connect to MongoDB Atlas
@@ -27,7 +27,7 @@ data_file = 'fallecidos_data.json'
 
 # Web scraper function to update fallecidos data
 def scrape_fallecidos():
-    url = 'https://cnnespanol.cnn.com/2024/11/01/noticias-dana-tormentas-valencia-muertos-espana-orix-2/'
+    url = 'https://elpais.com/espana/2024-11-03/ultima-hora-de-la-dana-en-directo.html'
 
     while True:
         try:
@@ -46,7 +46,6 @@ def scrape_fallecidos():
                             if num_fallecidos > max_fallecidos:
                                 max_fallecidos = num_fallecidos
 
-                # Write the updated data to the JSON file
                 with open(data_file, 'w') as f:
                     json.dump({"fallecidos": max_fallecidos}, f)
                 print(f"Updated fallecidos: {max_fallecidos}")
@@ -57,10 +56,8 @@ def scrape_fallecidos():
         except Exception as e:
             print(f"Error during scraping: {e}")
 
-        # Wait for 3 minutes before scraping again
         time.sleep(180)
 
-# Start the scraper function in a separate thread
 threading.Thread(target=scrape_fallecidos, daemon=True).start()
 
 # Endpoint to serve React's index.html
@@ -75,20 +72,24 @@ def serve_react(path):
 @app.route('/test-db-connection', methods=['GET'])
 def test_db_connection():
     try:
-        # Intenta contar los documentos como prueba de conexión
         count = collection.count_documents({})
         return jsonify({"status": "success", "count": count}), 200
     except Exception as e:
         return jsonify({"status": "error", "error": str(e)}), 503
 
-# News API route for centralized news handling
-@app.route('/news', methods=['GET'])
+# News API route for centralized news handling with TheNewsAPI
+@app.route('/api/news', methods=['GET'])
 def get_news():
+    api_key = 'jQD00NKnInedCYwGJPrTkLj7Uj0SKnH4HkOi2SS0'  # Reemplaza con tu clave de TheNewsAPI
     try:
         response = requests.get(
-            'https://newsapi.org/v2/everything?q=DANA+valencia&apiKey=e0fa1fbb58c84981bb65ac4b7451fc21'
+            f'https://api.thenewsapi.com/v1/news/all?api_token={api_key}&language=es&search=DANA+valencia'
         )
-        return jsonify(response.json()), response.status_code
+        data = response.json()
+        if 'data' in data:
+            return jsonify({"articles": data['data']}), response.status_code
+        else:
+            return jsonify({"articles": []}), 200
     except Exception as e:
         return jsonify({"error": str(e)}), 500
 
@@ -135,7 +136,6 @@ def add_desaparecido():
     detalles = request.form['detalles']
     fecha = request.form['fecha']
     
-    # Convert image to base64
     imagen = request.files['imagen']
     imagen_base64 = base64.b64encode(imagen.read()).decode('utf-8') if imagen else None
 
@@ -147,7 +147,6 @@ def add_desaparecido():
         "imagen": imagen_base64
     }
 
-    # Insert into the collection
     result = collection.insert_one(nuevo_desaparecido)
     nuevo_desaparecido["_id"] = str(result.inserted_id)
 

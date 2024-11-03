@@ -9,7 +9,6 @@ function HomePage() {
     const [numDesaparecidos, setNumDesaparecidos] = useState(0);
     const [news, setNews] = useState([]);
 
-    // Fetch fallecidos data
     useEffect(() => {
         const fetchFallecidos = async () => {
             try {
@@ -23,7 +22,6 @@ function HomePage() {
         fetchFallecidos();
     }, []);
 
-    // Fetch desaparecidos count
     useEffect(() => {
         const fetchDesaparecidosCount = async () => {
             try {
@@ -37,20 +35,20 @@ function HomePage() {
         fetchDesaparecidosCount();
     }, []);
 
-    // Fetch news data and refresh every hour
     useEffect(() => {
         const fetchNews = async () => {
             try {
                 const response = await axios.get(`${baseURL}/api/news`);
-                setNews(response.data.articles);
+                setNews(response.data.articles || []);
             } catch (error) {
                 console.error('Error fetching news:', error);
+                setNews([]);
             }
         };
 
         fetchNews();
 
-        const interval = setInterval(fetchNews, 900000); 
+        const interval = setInterval(fetchNews, 900000); // 15-minute interval
         return () => clearInterval(interval);
     }, []);
 
@@ -70,19 +68,23 @@ function HomePage() {
             <section className="news-section">
                 <h3>Noticias Relevantes</h3>
                 <ul>
-                    {news.slice(0, 5).map((article, index) => (
-                        <li key={index} className="news-item">
-                            {article.urlToImage && (
-                                <img src={article.urlToImage} alt="Imagen de la noticia" className="news-image" />
-                            )}
-                            <div className="news-content">
-                                <a href={article.url} target="_blank" rel="noopener noreferrer">
-                                    {article.title}
-                                </a>
-                                <p>{article.description}</p>
-                            </div>
-                        </li>
-                    ))}
+                    {news.length > 0 ? (
+                        news.slice(0, 5).map((article, index) => (
+                            <li key={index} className="news-item">
+                                {article.image_url && (
+                                    <img src={article.image_url} alt="Imagen de la noticia" className="news-image" />
+                                )}
+                                <div className="news-content">
+                                    <a href={article.url} target="_blank" rel="noopener noreferrer">
+                                        {article.title}
+                                    </a>
+                                    <p>{article.description}</p>
+                                </div>
+                            </li>
+                        ))
+                    ) : (
+                        <p>No hay noticias disponibles en este momento.</p>
+                    )}
                 </ul>
             </section>  
         </div>
