@@ -58,7 +58,7 @@ body {
     border: 2px solid purple; /* Borde rojo */
     border-radius: 4px; /* Bordes redondeados */
     margin-right: auto; /* Ajusta el valor para moverlo a la derecha */
-    background-color: white;
+    
 }
 .nav-item {
     margin-left: 2.5rem; /* Mayor espacio entre los elementos */
@@ -70,8 +70,6 @@ body {
     font-weight: bold;
     transition: color 0.3s;
     font-size: 1.6rem; /* Aumenté el tamaño de los enlaces */
-    border: 2px solid white; /* Borde rojo */
-    background-color:white;
     border-radius: 4px; /* Bordes redondeados */
 }
 
