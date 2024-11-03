@@ -18,12 +18,12 @@ body {
 }
 
 .navbar {
-    background-color: black; /* Color rojo de España */
+    background-color: black;
     display: flex;
-    justify-content: flex-start; /* Cambiado a flex-start */
+    justify-content: space-between;
     align-items: center;
-    padding: 1rem 2rem;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Sombra más pronunciada para el navbar */
+    padding: 0.5rem 1rem; /* Reduced padding */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 
 .navbar-brand {
@@ -35,23 +35,23 @@ body {
 
 .navbar-nav {
     list-style-type: none;
+    display: flex;
     margin: 0;
     padding: 0;
-    display: flex;
-    
 }
+
 .navbar-logo {
-    height: 70px; /* Ajusta la altura según lo que necesites */
-    width: auto; /* Mantiene la proporción */
-    margin-right: 1rem; /* Espacio a la derecha del logo */
+    width: 50px; /* Smaller size for logo */
+    height: auto;
+    margin-right: 1rem;
 }
-.navbar-xlogo{
-    height: 50px; /* Ajusta la altura según lo que necesites */
-    width: auto; /* Mantiene la proporción */
-    margin-left: 40rem; /* Esto empuja el logo a la derecha */
+.navbar-xlogo {
+    width: 30px; /* Smaller size for right logo */
+    height: auto;
+    margin-left: 1rem; /* Adjust spacing */
 }
 .navbar-title {
-    font-size: 2rem;
+    font-size: 1.5rem;
     font-weight: bold;
     color: rgb(43, 109, 184);
     padding: 0.3rem 0.5rem;
@@ -61,7 +61,7 @@ body {
     
 }
 .nav-item {
-    margin-left: 2.5rem; /* Mayor espacio entre los elementos */
+    margin-left: 2rem; /* Mayor espacio entre los elementos */
 }
 
 .nav-item a {
@@ -69,7 +69,7 @@ body {
     text-decoration: none;
     font-weight: bold;
     transition: color 0.3s;
-    font-size: 1.6rem; /* Aumenté el tamaño de los enlaces */
+    font-size: 1.3rem; /* Aumenté el tamaño de los enlaces */
     border-radius: 4px; /* Bordes redondeados */
 }
 
@@ -372,4 +372,26 @@ input[type="date"] {
     max-width: 300px;
     border: 1px solid #ddd;
     border-radius: 4px;
+}
+
+@media (max-width: 768px) {
+    .navbar {
+        flex-direction: column; /* Stack items on smaller screens */
+        padding: 1rem;
+    }
+
+    .navbar-logo, .navbar-xlogo {
+        width: 40px; /* Further reduce size on smaller screens */
+        margin: 0.5rem;
+    }
+
+    .navbar-nav {
+        flex-direction: column; /* Stack nav items vertically */
+        align-items: center;
+        width: 100%;
+    }
+
+    .nav-item {
+        margin: 0.5rem 0; /* Space between stacked items */
+    }
 }
