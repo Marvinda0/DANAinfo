@@ -1,4 +1,4 @@
-from flask import Flask, jsonify, request
+from flask import Flask, jsonify, request, send_from_directory
 import base64
 from pymongo import MongoClient
 from flask_cors import CORS
@@ -14,7 +14,7 @@ import time
 load_dotenv()  # Load environment variables
 MONGODB_URI = os.getenv("MONGODB_URI")
 
-app = Flask(__name__)
+app = Flask(__name__, static_folder='static/build')  # Updated static folder
 CORS(app)  # Enable CORS
 
 # Connect to MongoDB Atlas
@@ -62,6 +62,14 @@ def scrape_fallecidos():
 
 # Start the scraper function in a separate thread
 threading.Thread(target=scrape_fallecidos, daemon=True).start()
+
+# Endpoint to serve React's index.html
+@app.route('/', defaults={'path': ''})
+@app.route('/<path:path>')
+def serve_react(path):
+    if path != "" and os.path.exists(os.path.join(app.static_folder, path)):
+        return send_from_directory(app.static_folder, path)
+    return send_from_directory(app.static_folder, 'index.html')
 
 # Endpoint to retrieve the number of fallecidos
 @app.route('/fallecidos', methods=['GET'])
