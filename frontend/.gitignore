@@ -11,10 +11,12 @@
 # production
 /build
 
+# Ignorar .env en backend
+/backend/.env
+
 # misc
 .DS_Store
-/backend/.env
-.env.local
+DANAINFO.env.local
 .env.development.local
 .env.test.local
 .env.production.local
