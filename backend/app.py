@@ -39,13 +39,15 @@ def scrape_fallecidos():
                 paragraphs = soup.find_all('p')
 
                 for paragraph in paragraphs:
-                        if re.search(r'\b(fallecidos|muertos|víctimas)\b', paragraph.text, re.IGNORECASE):
-                            match = re.search(r'(\d+)', paragraph.text)
-                        if match:
-                            num_fallecidos = int(match.group(0))
-                            if num_fallecidos > max_fallecidos:
-                                max_fallecidos = num_fallecidos
+                    # Check if paragraph contains relevant keywords
+                    if re.search(r'\b(fallecidos|muertos|víctimas)\b', paragraph.text, re.IGNORECASE):
+                        # Find all numbers in the paragraph
+                        matches = re.findall(r'\b(\d+)\b', paragraph.text)
+                        # Convert matches to integers and update max_fallecidos if applicable
+                        if matches:
+                            max_fallecidos = max(max_fallecidos, max(map(int, matches)))
 
+                # Save the result to a JSON file
                 with open(data_file, 'w') as f:
                     json.dump({"fallecidos": max_fallecidos}, f)
                 print(f"Updated fallecidos: {max_fallecidos}")
@@ -58,6 +60,7 @@ def scrape_fallecidos():
 
         time.sleep(180)
 
+# Start the scraping in a separate thread
 threading.Thread(target=scrape_fallecidos, daemon=True).start()
 
 # Endpoint to serve React's index.html and handle unknown routes
