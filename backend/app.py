@@ -6,8 +6,11 @@ import base64
 from pymongo import MongoClient
 from flask_cors import CORS
 import config  
-load_dotenv()
 from dotenv import load_dotenv
+import os
+
+load_dotenv()  # Carga variables desde .env
+MONGODB_URI = os.getenv("MONGODB_URI")
 
 app = Flask(__name__)
 CORS(app)  # Permitir solicitudes de CORS
