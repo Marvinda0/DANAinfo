@@ -14,7 +14,7 @@ function Desaparecidos() {
     const [mensaje, setMensaje] = useState('');
     const [page, setPage] = useState(1);
     const [totalCount, setTotalCount] = useState(0);
-    const [searchTerm, setSearchTerm] = useState(''); // Estado para el término de búsqueda
+    const [searchTerm, setSearchTerm] = useState('');
     const limit = 6;
 
     useEffect(() => {
@@ -71,7 +71,6 @@ function Desaparecidos() {
 
     const totalPages = Math.ceil(totalCount / limit);
 
-    // Filtrar la lista de desaparecidos por nombre
     const filteredDesaparecidos = desaparecidos.filter(persona =>
         persona.nombre.toLowerCase().includes(searchTerm.toLowerCase())
     );
@@ -126,7 +125,6 @@ function Desaparecidos() {
                 <button type="submit">Agregar Desaparecido</button>
             </form>
 
-            {/* Campo de búsqueda */}
             <div className="search-container">
                 <input
                     type="text"

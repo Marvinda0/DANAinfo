@@ -6,7 +6,7 @@ const baseURL = process.env.REACT_APP_API_URL || 'http://localhost:5000';
 
 function HomePage() {
     const [numFallecidos, setNumFallecidos] = useState(0);
-    const [numDesaparecidos, setNumDesaparecidos] = useState(0); // State for desaparecidos count
+    const [numDesaparecidos, setNumDesaparecidos] = useState(0);
     const [news, setNews] = useState([]);
 
     // Fetch fallecidos data
@@ -53,7 +53,7 @@ function HomePage() {
         fetchNews();
 
         const interval = setInterval(fetchNews, 900000); 
-        return () => clearInterval(interval); // Cleanup interval on unmount
+        return () => clearInterval(interval);
     }, []);
 
     return (
