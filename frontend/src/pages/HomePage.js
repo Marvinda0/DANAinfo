@@ -4,6 +4,7 @@ import '../static/css/style.css';
 
 function HomePage() {
     const [numFallecidos, setNumFallecidos] = useState(0);
+    const [numDesaparecidos, setNumDesaparecidos] = useState(0); // State for desaparecidos count
     const [news, setNews] = useState([]);
 
     // Fetch fallecidos data
@@ -20,12 +21,26 @@ function HomePage() {
         fetchFallecidos();
     }, []);
 
+    // Fetch desaparecidos count
+    useEffect(() => {
+        const fetchDesaparecidosCount = async () => {
+            try {
+                const response = await axios.get('http://localhost:5000/desaparecidos/count');
+                setNumDesaparecidos(response.data.count);
+            } catch (error) {
+                console.error('Error fetching desaparecidos count:', error);
+            }
+        };
+
+        fetchDesaparecidosCount();
+    }, []);
+
     // Fetch news data and refresh every hour
     useEffect(() => {
         const fetchNews = async () => {
             try {
                 const response = await axios.get(
-                    `https://newsapi.org/v2/everything?q=DANA+valencia&apiKey=${process.env.REACT_APP_NEWS_API_KEY}`
+                    `https://newsapi.org/v2/everything?q=DANA+valencia&apiKey=e0fa1fbb58c84981bb65ac4b7451fc21`
                 );
                 setNews(response.data.articles);
             } catch (error) {
@@ -48,7 +63,7 @@ function HomePage() {
             <div className="stats">
                 <p><strong>Número de Fallecidos:</strong> <span id="numMuertos">{numFallecidos}</span></p>
                 <p className="clarification-text">Cifras provisionales ofrecidas por el Gobierno español este sábado</p> 
-                <p><strong>Número de desaparecidos:</strong> <span id="numDesaparecidos">0</span></p>
+                <p><strong>Número de desaparecidos:</strong> <span id="numDesaparecidos">{numDesaparecidos}</span></p>
                 <p className="clarification-text">Desaparecidos publicados en esta página web en concreto</p>
             </div>
 
