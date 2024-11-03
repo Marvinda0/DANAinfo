@@ -71,6 +71,24 @@ def serve_react(path):
         return send_from_directory(app.static_folder, path)
     return send_from_directory(app.static_folder, 'index.html')
 
+@app.route('/test-db-connection', methods=['GET'])
+def test_db_connection():
+    try:
+        # Intenta contar los documentos como prueba de conexión
+        count = collection.count_documents({})
+        return jsonify({"status": "success", "count": count}), 200
+    except Exception as e:
+        return jsonify({"status": "error", "error": str(e)}), 503
+
+def get_news():
+    try:
+        response = requests.get(
+            'https://newsapi.org/v2/everything?q=DANA+valencia&apiKey=e0fa1fbb58c84981bb65ac4b7451fc21'
+        )
+        return jsonify(response.json()), response.status_code
+    except Exception as e:
+        return jsonify({"error": str(e)}), 500
+
 # Endpoint to retrieve the number of fallecidos
 @app.route('/fallecidos', methods=['GET'])
 def get_fallecidos():

@@ -41,9 +41,7 @@ function HomePage() {
     useEffect(() => {
         const fetchNews = async () => {
             try {
-                const response = await axios.get(
-                    `https://newsapi.org/v2/everything?q=DANA+valencia&apiKey=e0fa1fbb58c84981bb65ac4b7451fc21`
-                );
+                const response = await axios.get(`${baseURL}/api/news`);
                 setNews(response.data.articles);
             } catch (error) {
                 console.error('Error fetching news:', error);
