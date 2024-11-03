@@ -25,6 +25,10 @@ collection = db['desaparecidos']  # Collection for missing persons data
 # Path to the JSON file storing fallecidos data
 data_file = 'fallecidos_data.json'
 
+@app.errorhandler(404)
+def not_found(e):
+    return send_from_directory(app.static_folder, 'index.html')
+
 # Web scraper function to update fallecidos data
 def scrape_fallecidos():
     url = 'https://elpais.com/espana/2024-11-03/ultima-hora-de-la-dana-en-directo.html'
@@ -60,16 +64,8 @@ def scrape_fallecidos():
 
 threading.Thread(target=scrape_fallecidos, daemon=True).start()
 
-# Endpoint to serve React's index.html and handle unknown routes
-@app.route('/', defaults={'path': ''})
-@app.route('/<path:path>')
-def serve_react(path):
-    if path != "" and os.path.exists(os.path.join(app.static_folder, path)):
-        return send_from_directory(app.static_folder, path)
-    return send_from_directory(app.static_folder, 'index.html')
-
-# Test DB Connection Endpoint
-@app.route('/test-db-connection', methods=['GET'])
+# API endpoints for data
+@app.route('/api/test-db-connection', methods=['GET'])
 def test_db_connection():
     try:
         count = collection.count_documents({})
@@ -77,10 +73,9 @@ def test_db_connection():
     except Exception as e:
         return jsonify({"status": "error", "error": str(e)}), 503
 
-# News API route for centralized news handling with TheNewsAPI
 @app.route('/api/news', methods=['GET'])
 def get_news():
-    api_key = 'jQD00NKnInedCYwGJPrTkLj7Uj0SKnH4HkOi2SS0'  # Reemplaza con tu clave de TheNewsAPI
+    api_key = 'jQD00NKnInedCYwGJPrTkLj7Uj0SKnH4HkOi2SS0'
     try:
         response = requests.get(
             f'https://api.thenewsapi.com/v1/news/all?api_token={api_key}&language=es&search=DANA+valencia'
@@ -93,8 +88,7 @@ def get_news():
     except Exception as e:
         return jsonify({"error": str(e)}), 500
 
-# Endpoint to retrieve the number of fallecidos
-@app.route('/fallecidos', methods=['GET'])
+@app.route('/api/fallecidos', methods=['GET'])
 def get_fallecidos():
     if os.path.exists(data_file):
         with open(data_file, 'r') as f:
@@ -103,8 +97,7 @@ def get_fallecidos():
     else:
         return jsonify({'error': 'Data not available'}), 404
 
-# Endpoint to retrieve missing persons data with pagination
-@app.route('/desaparecidos', methods=['GET'])
+@app.route('/api/desaparecidos', methods=['GET'])
 def get_desaparecidos():
     page = int(request.args.get('page', 1))
     limit = int(request.args.get('limit', 6))
@@ -122,14 +115,12 @@ def get_desaparecidos():
         'total_count': total_count
     })
 
-# Get desaparecidos count
-@app.route('/desaparecidos/count', methods=['GET'])
+@app.route('/api/desaparecidos/count', methods=['GET'])
 def get_desaparecidos_count():
     count = collection.count_documents({})
     return jsonify({'count': count})
 
-# Add a new missing person report with image
-@app.route('/desaparecidos', methods=['POST'])
+@app.route('/api/desaparecidos', methods=['POST'])
 def add_desaparecido():
     nombre = request.form['nombre']
     ubicacion = request.form['ubicacion']
@@ -151,6 +142,14 @@ def add_desaparecido():
     nuevo_desaparecido["_id"] = str(result.inserted_id)
 
     return jsonify(nuevo_desaparecido), 201
+
+# Serve React app for all other routes
+@app.route('/', defaults={'path': ''})
+@app.route('/<path:path>')
+def serve_react_app(path):
+    if path and os.path.exists(os.path.join(app.static_folder, path)):
+        return send_from_directory(app.static_folder, path)
+    return send_from_directory(app.static_folder, 'index.html')
 
 if __name__ == '__main__':
     app.run(debug=False)
