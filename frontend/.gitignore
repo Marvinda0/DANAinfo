@@ -12,7 +12,7 @@
 /build
 
 # Ignorar .env en backend
-/backend/.env
+backend/.env
 
 # misc
 .DS_Store
