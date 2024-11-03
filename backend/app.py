@@ -39,8 +39,8 @@ def scrape_fallecidos():
                 paragraphs = soup.find_all('p')
 
                 for paragraph in paragraphs:
-                    if '(fallecidos|muertos|victimas)' in paragraph.text:
-                        match = re.search(r'(\d+)', paragraph.text)
+                        if re.search(r'\b(fallecidos|muertos|víctimas)\b', paragraph.text, re.IGNORECASE):
+                            match = re.search(r'(\d+)', paragraph.text)
                         if match:
                             num_fallecidos = int(match.group(0))
                             if num_fallecidos > max_fallecidos:
