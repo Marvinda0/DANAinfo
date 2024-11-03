@@ -124,4 +124,4 @@ def add_desaparecido():
     return jsonify(nuevo_desaparecido), 201
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run(debug=False)
