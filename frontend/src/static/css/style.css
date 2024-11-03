@@ -362,3 +362,16 @@ input[type="date"] {
     0% { transform: rotate(0deg); }
     100% { transform: rotate(360deg); }
 }
+
+.search-container {
+    margin: 20px 0;
+    text-align: center;
+}
+
+.search-input {
+    padding: 8px;
+    width: 50%;
+    max-width: 300px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+}

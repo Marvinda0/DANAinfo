@@ -3,7 +3,7 @@ import axios from 'axios';
 
 function Desaparecidos() {
     const [desaparecidos, setDesaparecidos] = useState([]);
-    const [loading, setLoading] = useState(true); 
+    const [loading, setLoading] = useState(true);
     const [nombre, setNombre] = useState('');
     const [ubicacion, setUbicacion] = useState('');
     const [detalles, setDetalles] = useState('');
@@ -12,9 +12,9 @@ function Desaparecidos() {
     const [mensaje, setMensaje] = useState('');
     const [page, setPage] = useState(1);
     const [totalCount, setTotalCount] = useState(0);
+    const [searchTerm, setSearchTerm] = useState(''); // Estado para el término de búsqueda
     const limit = 6;
 
-    // Cargar la lista de desaparecidos con paginación
     useEffect(() => {
         const fetchDesaparecidos = async () => {
             try {
@@ -57,7 +57,7 @@ function Desaparecidos() {
                 setDetalles('');
                 setFecha('');
                 setImagen(null);
-                setPage(1); 
+                setPage(1);
             } else {
                 setMensaje("Error al agregar desaparecido");
             }
@@ -68,6 +68,11 @@ function Desaparecidos() {
     };
 
     const totalPages = Math.ceil(totalCount / limit);
+
+    // Filtrar la lista de desaparecidos por nombre
+    const filteredDesaparecidos = desaparecidos.filter(persona =>
+        persona.nombre.toLowerCase().includes(searchTerm.toLowerCase())
+    );
 
     return (
         <div className="desaparecidos-container">
@@ -119,6 +124,17 @@ function Desaparecidos() {
                 <button type="submit">Agregar Desaparecido</button>
             </form>
 
+            {/* Campo de búsqueda */}
+            <div className="search-container">
+                <input
+                    type="text"
+                    placeholder="Buscar por nombre..."
+                    value={searchTerm}
+                    onChange={(e) => setSearchTerm(e.target.value)}
+                    className="search-input"
+                />
+            </div>
+
             {loading ? (
                 <div className="loading">
                     <div className="spinner"></div>
@@ -126,7 +142,7 @@ function Desaparecidos() {
                 </div>
             ) : (
                 <div className="desaparecidos-list">
-                    {desaparecidos.map((persona, index) => (
+                    {filteredDesaparecidos.map((persona, index) => (
                         <div key={index} className="desaparecido-card">
                             <h3>{persona.nombre}</h3>
                             <p><strong>Ubicación:</strong> {persona.ubicacion}</p>
