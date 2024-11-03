@@ -60,7 +60,7 @@ def scrape_fallecidos():
 
 threading.Thread(target=scrape_fallecidos, daemon=True).start()
 
-# Endpoint to serve React's index.html
+# Endpoint to serve React's index.html and handle unknown routes
 @app.route('/', defaults={'path': ''})
 @app.route('/<path:path>')
 def serve_react(path):
