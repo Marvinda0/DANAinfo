@@ -26,6 +26,7 @@ function Desaparecidos() {
                 setTotalCount(response.data.total_count);
             } catch (error) {
                 console.error('Error al cargar desaparecidos:', error);
+                setMensaje('Error al cargar datos. Inténtalo más tarde.');
             } finally {
                 setLoading(false);
             }

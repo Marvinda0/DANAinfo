@@ -71,6 +71,7 @@ def serve_react(path):
         return send_from_directory(app.static_folder, path)
     return send_from_directory(app.static_folder, 'index.html')
 
+# Test DB Connection Endpoint
 @app.route('/test-db-connection', methods=['GET'])
 def test_db_connection():
     try:
@@ -80,6 +81,8 @@ def test_db_connection():
     except Exception as e:
         return jsonify({"status": "error", "error": str(e)}), 503
 
+# News API route for centralized news handling
+@app.route('/news', methods=['GET'])
 def get_news():
     try:
         response = requests.get(
@@ -118,12 +121,13 @@ def get_desaparecidos():
         'total_count': total_count
     })
 
+# Get desaparecidos count
 @app.route('/desaparecidos/count', methods=['GET'])
 def get_desaparecidos_count():
     count = collection.count_documents({})
     return jsonify({'count': count})
 
-# Endpoint to add a new missing person report, including an image
+# Add a new missing person report with image
 @app.route('/desaparecidos', methods=['POST'])
 def add_desaparecido():
     nombre = request.form['nombre']
