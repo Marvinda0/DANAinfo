@@ -207,6 +207,31 @@ body {
     padding: 1rem;
 }
 
+.desaparecidos-container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+.desaparecidos-container h2 {
+    font-size: 2rem;
+    color: #333;
+    text-align: center;
+    margin-bottom: 0.5rem;
+}
+
+.desaparecidos-container p {
+    font-size: 1.3rem;
+    color: black;
+    text-align: center;
+    margin-bottom: 1.5rem;
+}
+
+textarea::placeholder {
+    color: #999;
+    font-size: 0.9rem;
+}
+
 form {
     display: flex;
     flex-direction: column;
@@ -256,35 +281,52 @@ input[type="date"] {
 /* Estilo de la lista de desaparecidos */
 .desaparecidos-list {
     display: flex;
-    flex-wrap: wrap; /* Permitir que los elementos pasen a una nueva fila cuando no caben */
-    gap: 1rem; /* Espacio entre carteles */
-    justify-content: center; /* Centrar los carteles en la pantalla */
-    margin-top: 20px;
-    padding: 0 10px; /* Espacio lateral para asegurar que los carteles no toquen los bordes */
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: space-between;
 }
-
 /* Estilo de carteles individuales */
 .desaparecido-card {
     background-color: #f9f9f9;
-    border: 1px solid #ddd;
     border-radius: 8px;
-    padding: 1rem;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    text-align: center;
+    padding: 15px;
+    width: 45%;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    max-width: 300px; /* Ancho máximo de cada cartel */
-    flex: 1 1 300px; /* Ancho flexible, permite que los carteles se ajusten en filas */
+    text-align: left;
 }
 
 /* Tamaño de imagen reducido */
-.desaparecido-card img {
+.desaparecido-image {
     max-width: 100%;
-    max-height: 200px;
+    border-radius: 8px;
+    margin-top: 10px;
+}
+
+.pagination {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 20px;
+}
+
+.pagination button {
+    padding: 10px 15px;
+    margin: 0 5px;
+    border: none;
+    background-color: #FF0000;
+    color: #fff;
     border-radius: 4px;
-    margin-bottom: 10px;
-    object-fit: cover;
+    cursor: pointer;
+}
+
+.pagination button:disabled {
+    background-color: #ccc;
+    cursor: not-allowed;
+}
+
+.pagination span {
+    margin: 0 10px;
+    font-weight: bold;
 }
 
 .desaparecido-card h3 {
@@ -297,4 +339,26 @@ input[type="date"] {
     margin: 0.3rem 0;
     color: #666;
     font-size: 0.9rem;
+}
+
+.loading {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 20px;
+}
+
+.spinner {
+    border: 6px solid #f3f3f3;
+    border-top: 6px solid #3498db;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    animation: spin 1s linear infinite;
+    margin-bottom: 10px;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
 }

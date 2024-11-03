@@ -2,10 +2,10 @@ from flask import Flask, jsonify, request
 import requests
 from bs4 import BeautifulSoup
 import re
+import base64
 from pymongo import MongoClient
 from flask_cors import CORS
 import config  # Asegúrate de tener config.py con el URI de MongoDB
-import base64
 
 app = Flask(__name__)
 CORS(app)  # Permitir solicitudes de CORS
@@ -38,11 +38,24 @@ def get_fallecidos():
 
     return jsonify({'error': 'Error al acceder a la página'}), 500
 
-# Endpoint para obtener todos los carteles de personas desaparecidas
+# Endpoint para obtener todos los carteles de personas desaparecidas con paginación
 @app.route('/desaparecidos', methods=['GET'])
 def get_desaparecidos():
-    desaparecidos = list(collection.find({}, {'_id': 0}))  # Excluir el campo _id para simplificar
-    return jsonify(desaparecidos)
+    page = int(request.args.get('page', 1))
+    limit = int(request.args.get('limit', 6))
+    skip = (page - 1) * limit
+    
+    total_count = collection.count_documents({})
+    desaparecidos = list(
+        collection.find({}, {'_id': 0})
+        .skip(skip)
+        .limit(limit)
+    )
+    
+    return jsonify({
+        'desaparecidos': desaparecidos,
+        'total_count': total_count
+    })
 
 # Endpoint para agregar un nuevo cartel de persona desaparecida, incluyendo imagen
 @app.route('/desaparecidos', methods=['POST'])
