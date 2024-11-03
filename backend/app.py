@@ -5,7 +5,9 @@ import re
 import base64
 from pymongo import MongoClient
 from flask_cors import CORS
-import config  # Asegúrate de tener config.py con el URI de MongoDB
+import config  
+load_dotenv()
+from dotenv import load_dotenv
 
 app = Flask(__name__)
 CORS(app)  # Permitir solicitudes de CORS
