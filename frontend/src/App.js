@@ -24,7 +24,8 @@ function App() {
                         <li className="nav-item"><Link to="/desaparecidos" className="desaparecidos-button">Desaparecidos</Link></li>
                         <li className="nav-item"><Link to="/PuntosDeAyuda">Puntos de ayuda</Link></li>
                     </ul>
-                    <a href="https://twitter.com/intent/tweet?text=Por%20favor%20compartid%20esta%20web%20para%20informar%20sobre%20la%20DANA" target="_blank" rel="noopener noreferrer">
+                    <a href="https://twitter.com/intent/tweet?text=Por%20favor%20compartid%20esta%20página%20para%20ayudar%20a%20añadir%20y%20buscar%20personas%20desaparecidas%20durante%20la%20DANA.%20Toda%20ayuda%20es%20importante%20%20https://danainfo-38d56c8f9a77.herokuapp.com
+" target="_blank" rel="noopener noreferrer">
                         <img src={xlogo} alt="Logo de X" className="navbar-xlogo" />
                     </a>
                 </nav>

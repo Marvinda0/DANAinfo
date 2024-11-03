@@ -60,7 +60,7 @@ function HomePage() {
 
             <div className="stats">
                 <p><strong>Número de Fallecidos:</strong> <span id="numMuertos">{numFallecidos}</span></p>
-                <p className="clarification-text">Cifras provisionales ofrecidas por el Gobierno español este sábado</p> 
+                <p className="clarification-text">Cifras provisionales ofrecidas por el Gobierno español</p> 
                 <p><strong>Número de desaparecidos:</strong> <span id="numDesaparecidos">{numDesaparecidos}</span></p>
                 <p className="clarification-text">Desaparecidos publicados en esta página web en concreto</p>
             </div>
