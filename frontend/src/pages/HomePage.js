@@ -6,6 +6,7 @@ function HomePage() {
     const [numFallecidos, setNumFallecidos] = useState(0);
     const [news, setNews] = useState([]);
 
+    // Fetch fallecidos data
     useEffect(() => {
         const fetchFallecidos = async () => {
             try {
@@ -15,10 +16,16 @@ function HomePage() {
                 console.error('Error fetching fallecidos:', error);
             }
         };
+
+        fetchFallecidos();
+    }, []);
+
+    // Fetch news data and refresh every hour
+    useEffect(() => {
         const fetchNews = async () => {
             try {
                 const response = await axios.get(
-                    `https://newsapi.org/v2/everything?q=DANA+valencia&apiKey=e0fa1fbb58c84981bb65ac4b7451fc21`
+                    `https://newsapi.org/v2/everything?q=DANA+valencia&apiKey=${process.env.REACT_APP_NEWS_API_KEY}`
                 );
                 setNews(response.data.articles);
             } catch (error) {
@@ -26,8 +33,10 @@ function HomePage() {
             }
         };
 
-        fetchFallecidos();
         fetchNews();
+
+        const interval = setInterval(fetchNews, 900000); 
+        return () => clearInterval(interval); // Cleanup interval on unmount
     }, []);
 
     return (
