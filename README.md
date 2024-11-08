@@ -1,19 +1,16 @@
-# DANAinfo 🌧️
+DANAinfo 🌧️
+DANAinfo is an informational platform created to provide details about missing persons and victims in emergency and disaster situations, like those caused by the DANA storm in Spain. The platform also includes sections for relevant news, statistics on casualties and missing persons, and plans to incorporate interactive maps in the future to show aid locations and affected areas.
 
-DANAinfo es una plataforma informativa dedicada a proporcionar detalles sobre personas desaparecidas y víctimas en situaciones de emergencia y catástrofes, como las producidas por la DANA en España. Además, se añaden secciones para recopilar noticias relevantes, ofrecer estadísticas de fallecidos y desaparecidos, e incluir en el futuro mapas interactivos para puntos de ayuda y zonas afectadas.
-
-## Funcionalidades 🌐
-
-- **Listado de Desaparecidos:** Los usuarios pueden añadir información sobre personas desaparecidas, incluyendo nombre, ubicación, fecha, detalles y una imagen.
-- **Paginación y Búsqueda:** Navegación paginada para manejar una lista extensa de desaparecidos y búsqueda por nombre.
-- **Noticias Relevantes:** Noticias recientes de fuentes confiables sobre las situaciones de emergencia.
-- **Información Actualizada:** Estadísticas de fallecidos en base a scraping de fuentes confiables.
-- **Planificación Futura:** Próximamente se incluirán mapas interactivos para ver puntos de ayuda, zonas afectadas, y puntos de recogida para voluntarios.
-
-## Tecnologías Utilizadas ⚙️
-
-- **Frontend:** React.js, CSS (diseño adaptado con estilos personalizados y animaciones).
-- **Backend:** Flask para la API, incluyendo rutas para obtener datos de desaparecidos y estadísticas de fallecidos.
-- **Base de Datos:** MongoDB Atlas para almacenar información sobre personas desaparecidas.
-- **Web Scraping:** BeautifulSoup y Requests para obtener y actualizar datos de fallecidos desde una fuente confiable.
-- **Deployment:** Heroku o una plataforma similar para desplegar la aplicación en la web.
+Features 🌐
+Missing Persons Directory: Users can add information about missing persons, including their name, location, date, details, and an image.
+Pagination and Search: Paginated navigation allows for efficient browsing of a large list of missing persons, with a search feature for filtering by name.
+Relevant News: Displays recent, reliable news sources related to emergency situations.
+Updated Statistics: Provides up-to-date statistics on casualties through data scraping from trusted sources.
+Future Plans: Upcoming features include interactive maps for aid points, affected areas, and volunteer collection sites.
+Technologies Used ⚙️
+Frontend: React.js and CSS, featuring custom styles and animations for an engaging and responsive design.
+Backend: Flask API, including routes to retrieve missing persons data and casualty statistics.
+Database: MongoDB Atlas, used to store information on missing persons.
+Web Scraping: BeautifulSoup and Requests for fetching and updating casualty data from reliable sources.
+Deployment: Deployed on Heroku or a similar platform to make the application accessible online.
+This project marked my first experience with both React and Flask and served as a learning opportunity to deepen my skills in web development and database management. The application is still in active development, with plans for further refinement and feature additions in the near future.
