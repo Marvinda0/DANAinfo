@@ -16,7 +16,7 @@ DANAinfo is an informational platform created to provide details about missing p
 - **Backend**: Flask API, including routes to retrieve missing persons data and casualty statistics.
 - **Database**: MongoDB Atlas, used to store information on missing persons.
 - **Web Scraping**: BeautifulSoup and Requests for fetching and updating casualty data from reliable sources.
-- **Deployment**: Deployed on Heroku or a similar platform to make the application accessible online.
+- **Deployment**: Deployed on Heroku. It is now down due to inactivity.
 
 ## Development Status
 
